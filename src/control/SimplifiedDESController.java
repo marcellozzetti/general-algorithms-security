@@ -8,7 +8,7 @@ import model.SimplifiedDES;
 public class SimplifiedDESController {
 
     public static SimplifiedDES modelSDES;
-    public int K1,K2;
+    public int K1, K2;
     //P10 permutation
     public static final int P10[] = { 3, 5, 2, 7, 4, 10, 1, 9, 8, 6};
     public static final int P10max = 10;
@@ -45,7 +45,6 @@ public class SimplifiedDESController {
      * @param plaintext
      */
     public byte encrypt(int plaintext) {
-        System.out.print("Encryption Process Starts........");
 
         plaintext = modelSDES.permute( plaintext, IP, IPmax);
         plaintext = modelSDES.fK( plaintext, K1);
@@ -61,8 +60,7 @@ public class SimplifiedDESController {
      * Decrypt method used to generate the plaintext
      * @param ciphertext
      */
-    public byte decrypt(int ciphertext ) {
-        System.out.print("Decryption Process Starts........");
+    public byte decrypt(int ciphertext) {
 
         ciphertext = modelSDES.permute( ciphertext, IP, IPmax);
         ciphertext = modelSDES.fK( ciphertext, K2);
