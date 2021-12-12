@@ -1,9 +1,8 @@
-# general-algorithms-security
-General Algorithms related to Security Topics - from master’s degree in computer science
+# Project
+Security Algorithms related of master’s degree in computer science
 
-
-Language
+# Language
 Created using Java native language
 
-IDE
+# IDE
 Projects based on IntelliJ
