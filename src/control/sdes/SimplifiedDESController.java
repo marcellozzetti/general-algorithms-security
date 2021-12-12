@@ -1,6 +1,6 @@
-package control;
+package control.sdes;
 
-import model.SimplifiedDES;
+import model.sdes.SimplifiedDES;
 
 /**
  * Created by marcello.ozzetti on 28/11/21.
@@ -23,7 +23,7 @@ public class SimplifiedDESController {
     public static final int IPImax = 8;
 
     /**
-     * Main constructor responsible for generate the Key K1 and K2
+     * SDESMain constructor responsible for generate the Key K1 and K2
      * @param key
      */
     public SimplifiedDESController(int key) {

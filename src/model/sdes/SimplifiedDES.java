@@ -1,4 +1,4 @@
-package model;
+package model.sdes;
 
 /**
  * Created by marcello.ozzetti on 28/11/21.

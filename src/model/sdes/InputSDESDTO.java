@@ -1,9 +1,9 @@
-package model;
+package model.sdes;
 
 /**
  * Created by marcello.ozzetti on 29/11/21.
  */
-public class InputDTO {
+public class InputSDESDTO {
 
     String operation;
     int key;
