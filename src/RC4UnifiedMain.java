@@ -1,4 +1,3 @@
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,19 +8,14 @@ import java.util.Scanner;
  */
 public class RC4UnifiedMain {
 
-    public static DataInputStream inp = new DataInputStream(System.in);
     public static InputRC4DTO input = new InputRC4DTO();
 
     public static void main(String args[]) throws Exception {
-
-        readInputData();
-
-        dataValidation();
-
-        processor();
+        if(readInputData() && dataValidation()){
+            processor();
+        }
 
         System.exit(0);
-
     }
 
     private static void processor() {
@@ -35,24 +29,25 @@ public class RC4UnifiedMain {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < cipher.length; i++) {
-            sb.append(String.format("%02x:", cipher[i]));
+            sb.append(String.format("%x:", cipher[i]));
         }
         System.out.println(sb.toString());
     }
 
-    private static void dataValidation() {
-        if (input.getKey().getBytes().length < 1 || input.getKey().getBytes().length > 256) {
-            throw new IllegalArgumentException(
-                    "key must be between 1 and 256 bytes");
+    private static boolean dataValidation() {
+        if (input.getKey() != null && (input.getKey().getBytes().length < 1 || input.getKey().getBytes().length > 256)) {
+            System.out.println("key must be between 1 and 256 bytes");
+            return false;
         }
 
-        if (input.getMessage().getBytes().length < 1 || input.getMessage().getBytes().length > 256) {
-            throw new IllegalArgumentException(
-                    "message must be between 1 and 256 bytes");
+        if (input.getMessage() != null && (input.getMessage().getBytes().length < 1 || input.getMessage().getBytes().length > 256)) {
+            System.out.println("message must be between 1 and 256 bytes");
+            return false;
         }
+        return true;
     }
 
-    private static void readInputData() throws IOException {
+    private static boolean readInputData() throws IOException {
 
         Scanner in = new Scanner(System.in);
         List<String> lines = new ArrayList<String>();
@@ -66,8 +61,16 @@ public class RC4UnifiedMain {
             lines.add(lineNew);
         }
 
-        input.setMessage(lines.get(0).toString());
-        input.setKey(lines.get(1).toString());
+        if(lines.size() != 2){
+            System.out.println("Input values Wrong!");
+            return false;
+        } else {
+
+            input.setMessage(lines.get(0).toString());
+            input.setKey(lines.get(1).toString());
+
+            return true;
+        }
     }
 
     static class InputRC4DTO {
@@ -128,10 +131,6 @@ public class RC4UnifiedMain {
                 ciphertext[counter] = (byte) (plaintext[counter] ^ k);
             }
             return ciphertext;
-        }
-
-        public byte[] decrypt(final byte[] ciphertext) {
-            return encrypt(ciphertext);
         }
     }
 }

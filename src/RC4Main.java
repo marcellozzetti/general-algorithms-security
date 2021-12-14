@@ -12,15 +12,11 @@ public class RC4Main {
     public static InputRC4DTO input = new InputRC4DTO();
 
     public static void main(String args[]) throws Exception {
-
-        readInputData();
-
-        dataValidation();
-
-        processor();
+        if(readInputData() && dataValidation()){
+            processor();
+        }
 
         System.exit(0);
-
     }
 
     private static void processor() {
@@ -34,24 +30,25 @@ public class RC4Main {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < cipher.length; i++) {
-            sb.append(String.format("%02x:", cipher[i]));
+            sb.append(String.format("%x:", cipher[i]));
         }
         System.out.println("Cipher Hex: " + sb.toString());
     }
 
-    private static void dataValidation() {
-        if (input.getKey().getBytes().length < 1 || input.getKey().getBytes().length > 256) {
-            throw new IllegalArgumentException(
-                    "key must be between 1 and 256 bytes");
+    private static boolean dataValidation() {
+        if (input.getKey() != null && (input.getKey().getBytes().length < 1 || input.getKey().getBytes().length > 256)) {
+            System.out.println("key must be between 1 and 256 bytes");
+            return false;
         }
 
-        if (input.getMessage().getBytes().length < 1 || input.getMessage().getBytes().length > 256) {
-            throw new IllegalArgumentException(
-                    "message must be between 1 and 256 bytes");
+        if (input.getMessage() != null && (input.getMessage().getBytes().length < 1 || input.getMessage().getBytes().length > 256)) {
+            System.out.println("message must be between 1 and 256 bytes");
+            return false;
         }
+        return true;
     }
 
-    private static void readInputData() throws IOException{
+    private static boolean readInputData() throws IOException{
 
         String message;
         String key;
@@ -65,5 +62,7 @@ public class RC4Main {
 
         input.setKey(key);
         input.setMessage(message);
+
+        return true;
     }
 }

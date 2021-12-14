@@ -40,8 +40,4 @@ public class RC4Model {
         }
         return ciphertext;
     }
-
-    public byte[] decrypt(final byte[] ciphertext) {
-        return encrypt(ciphertext);
-    }
 }
